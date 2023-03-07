@@ -1,17 +1,18 @@
 import sys
 
 import pygame
+from pygame.sprite import Group
 
 from bullet import Bullet
 
 
-def check_keydown_events(event, ai_settings, screen, ship, bullets):
+def check_keydown_events(event, ai_settings, screen, ship, bullets: Group):
     """Respond to keypresses."""
     if event.key == pygame.K_RIGHT:
         ship.moving_right = True
     elif event.key == pygame.K_LEFT:
         ship.moving_left = True
-    elif event.key == pygame.K_SPACE:
+    elif event.key == pygame.K_SPACE and len(bullets) < ai_settings.bullets_allowed:
         # Creates a new bullet and add it to the screen
         bullets.add(Bullet(ai_settings, screen, ship))
 

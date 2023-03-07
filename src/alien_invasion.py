@@ -29,6 +29,12 @@ def run_game():
         ship.update()
         bullets.update()
 
+        # * Get rid of bullet off the screen
+        # Use copy to be able to remove elements while iterating
+        for bullet in bullets.copy():
+            if bullet.rect.bottom <= 0:
+                bullets.remove(bullet)
+
         # * Draw the screen
         gf.update_screen(ai_settings, screen, ship, bullets)
 
