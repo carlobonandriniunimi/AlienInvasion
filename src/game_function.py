@@ -16,6 +16,8 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets: Group):
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:
         fire_bullet(ai_settings, screen, ship, bullets)
+    elif event.key == pygame.K_q:
+        sys.exit()
 
 
 def check_keyup_events(event, ship):
@@ -112,6 +114,10 @@ def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
 def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
     """Respond to ship being hit by alien."""
     # Decrement ships_left.
+    if stats.ships_left == 0:
+        stats.game_active = False
+        return
+
     stats.ships_left -= 1
 
     # Empty the list of aliens and bullets
